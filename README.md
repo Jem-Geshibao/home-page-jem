@@ -1,5 +1,7 @@
 # 杰姆盖世保 · 个人作品集
 
+**在线访问**：<https://jemgeshibao.gicp.fun>（花生壳 Drop 静态托管，国内直连）
+
 > 一个偏「编辑部 / 科技感」的暗色个人作品集站点：React + Vite 构建，GSAP 驱动开场与滚动动效，作品集用 Canvas 2D 轮播承载，WebGL 背景可选接入。
 
 面向 **CS 游戏内容 / AI 视频创作 / 短视频策划运营** 方向的创作者简历站，把「项目、数据、经历、作品链接」压在一个长滚动页面里，作品详情通过全屏面板打开，不跳站、不刷新。
@@ -192,12 +194,13 @@ REACTBITS_LICENSE_KEY=your_key_here
 
 纯静态站点，`npm run build` 后把 `dist/` 发布到任意静态托管即可：
 
-| 平台 | 构建命令 | 输出目录 |
-| --- | --- | --- |
-| Vercel | `npm run build` | `dist` |
-| Netlify | `npm run build` | `dist` |
-| Cloudflare Pages | `npm run build` | `dist` |
-| GitHub Pages / 对象存储 | 本地构建后上传 `dist/` | — |
+| 平台 | 构建命令 | 输出目录 | 国内访问 |
+| --- | --- | --- | --- |
+| 花生壳 Drop（本站在用） | `npm run build` | `dist` 打 zip 拖拽上传 | ✅ 备案国内节点，微信直开 |
+| Vercel | `npm run build` | `dist` | ❌ 默认域名国内不可达 |
+| Netlify | `npm run build` | `dist` | ⚠️ 波动较大 |
+| Cloudflare Pages | `npm run build` | `dist` | ⚠️ 尚可 |
+| GitHub Pages / 对象存储 | 本地构建后上传 `dist/` | — | ⚠️ 较慢 / 需备案 |
 
 站点没有前端路由，只有 `?work=<slug>` 查询参数，**不需要配置 SPA fallback rewrite**。
 
