@@ -1,0 +1,40 @@
+MIT License
+
+Copyright (c) 2026 杰姆盖世保 (JEM GESHIBAO)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+
+补充说明：内容素材不适用上述授权
+
+上述 MIT 许可仅覆盖本仓库的源代码（HTML / CSS / JavaScript 及其配置）。
+以下内容保留所有权利（All Rights Reserved），未经书面许可不得再分发或商用：
+
+- `public/covers/` 下的项目主视觉与作品封面缩略图（含客户项目素材）
+- `public/shanghaimajor.mp4`、`public/hero.mp4`、`public/hero-poster.jpg`
+- `public/avatar.jpg`
+- `src/data.js` 中的个人资料、项目描述、数据与文案
+
+关于第三方作品视频：本仓库不包含任何第三方作品视频文件，也未对其做转载、
+再分发或镜像。`src/data.js` 中 `gallery.videos[].url` 仅保存指向作品官方发布页
+（如抖音官方账号）的外链，点击后由用户浏览器直接访问原发布页播放。仓库内的
+`public/covers/gallery/` 只存放用于索引导航的封面缩略图，相关权利仍归原权利人。
+
+若要以此仓库作为模板搭建自己的站点，请将上述素材与文案替换为你自己的内容。

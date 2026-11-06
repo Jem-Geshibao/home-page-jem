@@ -1,0 +1,22 @@
+# 依赖与构建产物
+node_modules/
+dist/
+
+# 环境变量（.env.example 需要提交，不要忽略）
+.env
+.env.local
+.env.*.local
+
+# 本地工具与临时文件
+.tools/
+*.log
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# 本地验收截图
+.verify/

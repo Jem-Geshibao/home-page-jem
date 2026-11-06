@@ -1,0 +1,69 @@
+/* MicroSlats 占位样式：竖条阵列 + 透视倾斜 + 明暗流动。
+   替换为 React Bits 正式组件时，本文件会一并被官方 CSS 覆盖。 */
+
+.micro-slats {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--ms-bg, #080A0C);
+}
+
+.micro-slats::before {
+  content: '';
+  position: absolute;
+  inset: -25% -8%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ms-color, #AFC2CD) 70%, transparent) 0 var(--ms-slat, 10px),
+    transparent var(--ms-slat, 10px) calc(var(--ms-slat, 10px) + var(--ms-gap, 3px))
+  );
+  opacity: 0.32;
+  transform: perspective(900px) rotateX(20deg) scale(1.08);
+  transform-origin: 50% 60%;
+  /* 上下淡出，避免竖条在视口边缘被硬切 */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%, #000 68%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 32%, #000 68%, transparent 100%);
+  animation: ms-swell var(--ms-duration, 40s) ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+/* 一道冷白高光横扫，模拟「光痕」扫过的观感 */
+.micro-slats::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    color-mix(in srgb, var(--ms-glint, #FFFFFF) 10%, transparent) 50%,
+    transparent 65%
+  );
+  opacity: 0.5;
+  animation: ms-glint var(--ms-duration, 40s) linear infinite;
+  pointer-events: none;
+}
+
+@keyframes ms-swell {
+  from {
+    transform: perspective(900px) rotateX(20deg) scale(1.08) translate3d(0, -1.5%, 0);
+  }
+  to {
+    transform: perspective(900px) rotateX(16deg) scale(1.14) translate3d(0, 1.5%, 0);
+  }
+}
+
+@keyframes ms-glint {
+  from {
+    transform: translate3d(-30%, 0, 0);
+  }
+  to {
+    transform: translate3d(30%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .micro-slats::before,
+  .micro-slats::after {
+    animation: none;
+  }
+}

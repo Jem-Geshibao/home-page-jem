@@ -1,0 +1,42 @@
+/* PatternWaves 占位样式：点阵 + 缓慢漂移，四周渐隐融入背景。
+   替换为 React Bits 正式组件时，本文件会一并被官方 CSS 覆盖。 */
+
+.pattern-waves {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--pw-bg, #08090B);
+  opacity: var(--pw-opacity, 1);
+}
+
+.pattern-waves::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--pw-color, #8FA3B0) 52%, transparent) 0 1px,
+    transparent 1.3px
+  );
+  background-size: var(--pw-spacing, 14px) var(--pw-spacing, 14px);
+  /* 中间清晰、四周淡出，避免点阵顶到版心边缘像网格线 */
+  -webkit-mask-image: radial-gradient(ellipse 76% 68% at 50% 46%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 82%);
+  mask-image: radial-gradient(ellipse 76% 68% at 50% 46%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 82%);
+  animation: pw-drift 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes pw-drift {
+  from {
+    transform: translate3d(-1.6%, -1%, 0) scale(1.02);
+  }
+  to {
+    transform: translate3d(1.6%, 1.2%, 0) scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-waves::before {
+    animation: none;
+  }
+}

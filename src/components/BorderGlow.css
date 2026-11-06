@@ -1,0 +1,73 @@
+/* BorderGlow 占位样式：边框提亮 + 跟随光标的柔光。
+   --glow 是「R G B」三元组（如 200 24 88），方便用 rgb(var(--glow) / alpha) 叠透明度。 */
+
+.border-glow-card {
+  --glow: 200 24 88;
+  --glow-padding: 40px;
+  --glow-intensity: 1;
+  --fill-opacity: 0.5;
+  --mx: 50%;
+  --my: 0%;
+
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  border-radius: var(--border-radius, 28px);
+  border: 1px solid rgb(255 255 255 / 15%);
+  background: var(--card-bg, #120f17);
+  overflow: visible;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.border-glow-card:hover {
+  border-color: rgb(var(--glow) / 0.55);
+  box-shadow: 0 18px 60px rgb(var(--glow) / 0.16);
+}
+
+/* 边框外扩的一层光：靠 box-shadow 叠出「辉光」而不是硬描边 */
+.border-glow-card > .edge-light {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  box-shadow:
+    0 0 0 1px rgb(var(--glow) / 0.6),
+    0 0 calc(var(--glow-padding) * 1.1) rgb(var(--glow) / 0.3);
+}
+
+/* 跟随光标的光斑：radial-gradient 以 --mx/--my 为圆心，悬停时才显形 */
+.border-glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgb(var(--glow) / calc(0.28 * var(--fill-opacity) * 2)) 0%,
+    transparent 42%
+  );
+}
+
+.border-glow-card:hover > .edge-light,
+.border-glow-card:hover::after {
+  opacity: var(--glow-intensity);
+}
+
+.border-glow-inner {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-glow-card,
+  .border-glow-card > .edge-light,
+  .border-glow-card::after {
+    transition: none;
+  }
+}

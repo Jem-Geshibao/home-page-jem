@@ -1,0 +1,104 @@
+/* Prism Carousel — base styles. Site-specific overrides live in WorkGallery.css. */
+.prism-carousel {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--pc-bg, transparent);
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.prism-carousel:active { cursor: grabbing; }
+.prism-carousel:focus-visible { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .42); }
+
+.prism-carousel__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.prism-carousel__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 66px;
+  z-index: 2;
+  padding: 0 24px;
+  text-align: center;
+  pointer-events: none;
+  animation: pc-rise .5s cubic-bezier(.22, .72, .2, 1) both;
+}
+.prism-carousel__caption a { pointer-events: auto; }
+.prism-carousel__eyebrow {
+  display: block;
+  color: rgba(236, 238, 233, .42);
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+.prism-carousel__caption h4 {
+  margin: 7px 0 0;
+  color: var(--text, #ECEEE9);
+  font-size: clamp(16px, 1.5vw, 21px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.prism-carousel__caption p {
+  margin: 5px 0 0;
+  color: var(--muted, #8B9194);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+.prism-carousel__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.prism-carousel__btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-2, rgba(236, 238, 233, .17));
+  border-radius: 50%;
+  background: rgba(10, 13, 15, .6);
+  color: var(--text, #ECEEE9);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.prism-carousel__btn:hover {
+  border-color: rgba(255, 255, 255, .6);
+  background: rgba(255, 255, 255, .1);
+  transform: scale(1.06);
+}
+.prism-carousel__count {
+  color: var(--muted, #8B9194);
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+.prism-carousel__count i { color: var(--dim, #5B6164); font-style: normal; margin: 0 4px; }
+
+@keyframes pc-rise {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prism-carousel__caption { animation: none; }
+  .prism-carousel__btn { transition: none; }
+}

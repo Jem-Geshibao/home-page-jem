@@ -1,0 +1,89 @@
+/* StarBorder 占位样式：细描边轨道 + 悬停时沿边框滑行的光带。
+   替换为 React Bits 正式组件时，本文件会一并被官方 CSS 覆盖。 */
+
+.star-border {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.875rem 1.5rem;
+  border: 0;
+  border-radius: var(--star-border-radius, 12px);
+  background: var(--star-border-surface, #0d1115);
+  color: var(--star-border-text, #eceee9);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 描边用 inset 阴影画，方便站点样式在 hover 时只改阴影、不挪布局 */
+.star-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 var(--star-border-thickness, 1px) var(--star-border-track, rgba(236, 238, 233, 0.13));
+  pointer-events: none;
+}
+
+/* 光带：一整块渐变，再用「双层遮罩求异或」裁成只有 1px 的环 */
+.star-border__light {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: var(--star-border-thickness, 1px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: linear-gradient(
+      110deg,
+      transparent 0%,
+      transparent 36%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(168, 189, 201, 0.6) 57%,
+      transparent 70%
+    )
+    0 0 / 240% 100%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.star-border:hover .star-border__light,
+.star-border:focus-visible .star-border__light {
+  opacity: 1;
+  animation: sb-trail 3.6s linear infinite;
+}
+
+@keyframes sb-trail {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 240% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-border__light {
+    animation: none !important;
+  }
+  /* 装饰性光效保留静态描边，避免「亮着却完全不动」看起来像坏了 */
+  .star-border:hover .star-border__light,
+  .star-border:focus-visible .star-border__light {
+    opacity: 0.55;
+    background-position: 48% 50%;
+  }
+}
